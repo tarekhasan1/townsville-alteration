@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Townsville Alteration and formal wear",
   description: "- Try it, you will love it!",
+  icons: "/logo.png"
 };
 
 export default function RootLayout({

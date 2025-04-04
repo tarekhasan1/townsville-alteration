@@ -3,7 +3,7 @@
 
 export default function SuitHireSection() {
     return (
-        <section className="bg-[#f2f2e5] py-12 px-6 md:px-12 lg:px-24 text-gray-800 text-center">
+        <section className="bg-white py-12 px-6 md:px-12 lg:px-24 text-gray-800 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Red-Carpet-Worthy Suits.</h2>
             <p className="text-gray-700 max-w-2xl mx-auto mb-6">
                 Your event is in days, and your wardrobe is failing you. No stress. Our latest styles and timeless classics 
@@ -23,7 +23,7 @@ export default function SuitHireSection() {
                 <p><strong>STEP 3:</strong> Easy Returns - Pop your suit back, drop it off, and we'll handle the dry cleaning.</p>
             </div>
 
-            <button className="mt-6 px-6 py-3 border border-gray-800 rounded hover:bg-gray-800 hover:text-white transition">
+            <button className="mt-6 px-6 py-3 border border-gray-600 rounded hover:bg-yellow-300 hover:border-gray-50 hover:text-white transition">
                 HIRE SUIT NOW
             </button>
         </section>
