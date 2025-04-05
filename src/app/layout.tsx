@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Townsville Alteration and formal wear",
-  description: "- Try it, you will love it!",
+  title: "Townsville Alteration and Formal Wear",
+  description: " - Reinvent Your Wardrobe. Or Hire One That Turns Heads.",
   icons: "/logo.png"
 };
 
