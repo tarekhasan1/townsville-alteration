@@ -1,8 +1,7 @@
 import BannerCarousel from "@/components/BannerCarousel";
-import Gallery from "@/components/Gallery";
+import LatestCollection from "@/components/LatestCollection";
 import ServicesSection from "@/components/ServicesSection";
 import TailoringSection from "@/components/TailoringSection";
-// import TestimonialsSection from "@/components/TestimonialSection";
 
 export default function Home() {
   return (
@@ -10,8 +9,7 @@ export default function Home() {
       <BannerCarousel/>
       <TailoringSection/>
       <ServicesSection/>
-      <Gallery/>
-      {/* <TestimonialsSection/> */}
+      <LatestCollection/>
     </div>
   );
 }

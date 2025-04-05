@@ -17,7 +17,7 @@ export default function ContactSection() {
           />
         </div>
         <div className="space-y-6 text-center md:text-left">
-          <h2 className="text-4xl md:text-5xl font-semibold text-gray-800 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             We&apos;d love to work with you. Call us now.
           </h2>
           <hr className="border-yellow-300 border-[2px]" />
@@ -40,7 +40,7 @@ export default function ContactSection() {
                 <a target='_blank' href="https://www.facebook.com/DressmakingAlterationsTownsville" className="text-gray-800 hover:text-gray-600">
                   <Facebook size={24} />
                 </a>
-                <a href="#" className="text-gray-800 hover:text-gray-600">
+                <a target='_blank' href="https://www.instagram.com/tsvalterationformal?igsh=bXJkaXp3eXN4Yml2" className="text-gray-800 hover:text-gray-600">
                   <Instagram size={24} />
                 </a>
               </div>

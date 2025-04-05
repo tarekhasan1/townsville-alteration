@@ -74,7 +74,7 @@ export default function Navbar() {
 
                 {/* Right Section: User, Cart, Social Icons */}
                 <div className="flex items-center space-x-4">
-                    <a href="">
+                    <a target="_blank" href="https://www.instagram.com/tsvalterationformal?igsh=bXJkaXp3eXN4Yml2">
                         <Instagram
                             className="hidden lg:block text-gray-700 cursor-pointer"
                             size={20}

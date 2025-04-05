@@ -1,72 +1,115 @@
-'use client';
+"use client";
 
-import { CheckCircle } from 'lucide-react';
-import Image from 'next/image';
+import { CheckCircle } from "lucide-react";
+import Image from "next/image";
 
 export default function AlterationsSection() {
-  return (
-    <section className="bg-white py-12 px-6 md:px-12 lg:px-20 text-gray-800 text-center">
-      <div className="mx-auto text-center mt-[80px]">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Clothing Alterations & Repairs</h1>
-        <hr className="border-yellow-300 border-[2px] my-4" />
-        <p className="mt-4 text-lg font-semibold">Because the Perfect Fit Changes Everything</p>
-        <p className="mt-2 text-gray-600">
-          Whether it’s your favorite dress that needs a little tweaking, a suit that could use some sharpening, or jeans that
-          just don’t fit quite right—our expert tailoring team can make it fit like a dream.
-        </p>
-      </div>
+    return (
+        <section className="bg-gradient-to-br from-white to-yellow-50 py-16 px-6 md:px-12 lg:px-24 text-gray-800 pt-[100px]">
+            <div className="max-w-4xl mx-auto text-center">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+                    Clothing Alterations & Repairs
+                </h1>
+                <hr className="w-20 border-yellow-400 border-[3px] mx-auto my-6 rounded-full" />
+                <p className="text-xl font-semibold">
+                    Because the Perfect Fit Changes Everything
+                </p>
+                <p className="mt-4 text-gray-600 text-base md:text-lg leading-relaxed">
+                    Whether it’s your favorite dress that needs a little
+                    tweaking, a suit that could use some sharpening, or jeans
+                    that just don’t fit quite right—our expert tailoring team
+                    can make it fit like a dream.
+                </p>
+            </div>
 
-      <div className="mx-auto mt-8 space-y-6">
-        <div>
-          <h2 className="text-xl font-semibold">Bridal & Formal Alterations</h2>
-          <p className="text-gray-600">Your wedding dress, bridesmaid gown, or formal attire should fit like it was made just for you.</p>
-          <ul className="list-disc list-inside text-gray-600 mt-2">
-            <li>Wedding dress resizing & adjustments</li>
-            <li>Bridesmaid dress & evening gown alterations</li>
-            <li>Suit & tuxedo alterations</li>
-            <li>Hemming, taking in, or letting out for the perfect shape</li>
-          </ul>
-        </div>
+            <div className="max-w-4xl mx-auto mt-12 grid gap-10">
+                <div className="bg-white shadow-lg rounded-2xl p-6">
+                    <h2 className="text-2xl font-semibold text-gray-800">
+                        Bridal & Formal Alterations
+                    </h2>
+                    <p className="mt-2 text-gray-600">
+                        Your wedding dress, bridesmaid gown, or formal attire
+                        should fit like it was made just for you.
+                    </p>
+                    <ul className="mt-4 space-y-2 text-gray-600 list-disc list-inside">
+                        <li>Wedding dress resizing & adjustments</li>
+                        <li>Bridesmaid dress & evening gown alterations</li>
+                        <li>Suit & tuxedo alterations</li>
+                        <li>
+                            Hemming, taking in, or letting out for the perfect
+                            shape
+                        </li>
+                    </ul>
+                </div>
 
-        <div>
-          <h2 className="text-xl font-semibold">Suit Alterations</h2>
-          <p className="text-gray-600">A great suit should fit like a second skin.</p>
-          <ul className="list-disc list-inside text-gray-600 mt-2">
-            <li>Jacket sleeve & trouser length adjustments</li>
-            <li>Waist & shoulder reshaping</li>
-            <li>Suit tapering for a modern fit</li>
-          </ul>
-        </div>
+                <div className="bg-white shadow-lg rounded-2xl p-6">
+                    <h2 className="text-2xl font-semibold text-gray-800">
+                        Suit Alterations
+                    </h2>
+                    <p className="mt-2 text-gray-600">
+                        A great suit should fit like a second skin.
+                    </p>
+                    <ul className="mt-4 space-y-2 text-gray-600 list-disc list-inside">
+                        <li>Jacket sleeve & trouser length adjustments</li>
+                        <li>Waist & shoulder reshaping</li>
+                        <li>Suit tapering for a modern fit</li>
+                    </ul>
+                </div>
 
-        <div className="flex justify-center my-6">
-          <Image width={100} height={100} objectFit="cover" src="/dress-icon.png" alt="dress icon" />
-        </div>
+                <div className="flex justify-center">
+                    <Image
+                        width={100}
+                        height={100}
+                        objectFit="cover"
+                        src="/dress-icon.png"
+                        alt="dress icon"
+                        className="rounded-full shadow-md"
+                    />
+                </div>
 
-        <div>
-          <h2 className="text-xl font-semibold">Racewear & Special Occasion Alterations</h2>
-          <p className="text-gray-600">Got a big day at the races or a special event?</p>
-          <ul className="list-disc list-inside text-gray-600 mt-2">
-            <li>Dress & skirt alterations</li>
-            <li>Adjustments to fitted blazers & jackets</li>
-            <li>Custom tailoring for race day looks</li>
-          </ul>
-        </div>
-      </div>
+                <div className="bg-white shadow-lg rounded-2xl p-6">
+                    <h2 className="text-2xl font-semibold text-gray-800">
+                        Racewear & Special Occasion Alterations
+                    </h2>
+                    <p className="mt-2 text-gray-600">
+                        Got a big day at the races or a special event?
+                    </p>
+                    <ul className="mt-4 space-y-2 text-gray-600 list-disc list-inside">
+                        <li>Dress & skirt alterations</li>
+                        <li>Adjustments to fitted blazers & jackets</li>
+                        <li>Custom tailoring for race day looks</li>
+                    </ul>
+                </div>
+            </div>
 
-      <div className="mx-auto mt-10 text-center">
-        <h2 className="text-xl font-semibold">Why Choose Us?</h2>
-        <ul className="mt-2 text-gray-600">
-          <li className="flex items-center justify-center gap-2"><CheckCircle size={18} /> Fast Turnaround – Quick, high-quality alterations</li>
-          <li className="flex items-center justify-center gap-2"><CheckCircle size={18} /> Expert Tailoring – Decades of experience</li>
-          <li className="flex items-center justify-center gap-2"><CheckCircle size={18} /> Personalized Service – Every client is unique</li>
-        </ul>
-      </div>
+            <div className="max-w-3xl mx-auto mt-16 text-center">
+                <h2 className="text-2xl font-semibold text-gray-800">
+                    Why Choose Us?
+                </h2>
+                <ul className="mt-6 space-y-4 text-gray-700 text-base">
+                    <li className="flex items-center justify-center gap-3">
+                        <CheckCircle size={20} className="text-yellow-500" />
+                        Fast Turnaround – Quick, high-quality alterations
+                    </li>
+                    <li className="flex items-center justify-center gap-3">
+                        <CheckCircle size={20} className="text-yellow-500" />
+                        Expert Tailoring – Decades of experience
+                    </li>
+                    <li className="flex items-center justify-center gap-3">
+                        <CheckCircle size={20} className="text-yellow-500" />
+                        Personalized Service – Every client is unique
+                    </li>
+                </ul>
+            </div>
 
-      <div className="flex justify-center mt-8">
-        <a href="mailto:sales@townsvillealterationsformalwear.com" className="border border-gray-600 text-gray-800 hover:text-white py-3 px-6 rounded-lg shadow-md hover:bg-yellow-300 hover:border-gray-50">
-          Send Measurements
-        </a>
-      </div>
-    </section>
-  );
+            <div className="flex justify-center mt-12">
+                <a
+                    href="mailto:sales@townsvillealterationsformalwear.com"
+                    className="bg-yellow-400 text-gray-900 font-semibold hover:bg-yellow-500 transition px-6 py-3 rounded-xl shadow-md"
+                >
+                    Send Measurements
+                </a>
+            </div>
+        </section>
+    );
 }

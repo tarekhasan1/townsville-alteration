@@ -5,7 +5,7 @@ export default function FAQSection() {
     <section className="bg-white py-12 px-6 md:px-12 lg:px-20 text-gray-800">
       <div className=" mx-auto text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900">FAQ</h1>
-        <hr className="border-yellow-300 border-[2px] my-4" />
+        <hr className="w-20 border-yellow-400 border-[3px] mx-auto my-6 rounded-full" />
       </div>
 
       <div className="mx-auto space-y-8 text-center text-gray-700">

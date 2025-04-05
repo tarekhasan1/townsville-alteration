@@ -4,6 +4,7 @@ export default function AboutUsSection() {
     return (
         <section className="bg-white py-12 px-6 md:px-12 lg:px-24 text-gray-800 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About Us</h2>
+            <hr className="w-20 border-yellow-400 border-[3px] mx-auto my-6 rounded-full" />
             <p className="text-gray-700 mx-auto mb-6">
                 We have over almost 40 years of experience in alterations and dressmaking. We specialize in formal 
                 women’s and menswear – Gowns, Dresses, and Suits. Now, we also offer custom-made suits, sales, and suit hire.

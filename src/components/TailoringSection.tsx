@@ -7,9 +7,9 @@ export default function TailoringSection() {
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
         <div>
-          <h1 className="text-4xl md:text-5xl font-semibold text-gray-800 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Tailoring Perfection, One Stitch at a Time.
-          </h1>
+          </h2>
           <hr className="mb-4 md:mb-8 border-[2px] text-yellow-300"/>
           <p className="text-gray-700 text-lg mb-6">
             Whether you're looking for a tailor-made suit, a last-minute formalwear hire, or expert alterations, we’ve got you covered literally.

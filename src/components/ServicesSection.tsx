@@ -21,7 +21,7 @@ const services = [
 export default function ServicesSection() {
   return (
     <section className="py-12 text-center w-full min-h-[85vh]">
-      <h2 className="text-4xl md:text-5xl font-semibold text-gray-800 mb-6">Services</h2>
+      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Services</h2>
       <div className="w-[80vw] border-b border-[2px] border-yellow-300 mx-auto mb-8"></div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto px-6">
         {services.map((service, index) => (
