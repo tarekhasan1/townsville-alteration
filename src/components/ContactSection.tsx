@@ -37,7 +37,7 @@ export default function ContactSection() {
             <div>
               <h3 className="font-semibold">SOCIAL</h3>
               <div className="flex justify-center md:justify-start space-x-4 text-xl">
-                <a href="#" className="text-gray-800 hover:text-gray-600">
+                <a target='_blank' href="https://www.facebook.com/DressmakingAlterationsTownsville" className="text-gray-800 hover:text-gray-600">
                   <Facebook size={24} />
                 </a>
                 <a href="#" className="text-gray-800 hover:text-gray-600">

@@ -8,6 +8,7 @@ export default function AlterationsSection() {
     <section className="bg-white py-12 px-6 md:px-12 lg:px-20 text-gray-800 text-center">
       <div className="mx-auto text-center mt-[80px]">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Clothing Alterations & Repairs</h1>
+        <hr className="border-yellow-300 border-[2px] my-4" />
         <p className="mt-4 text-lg font-semibold">Because the Perfect Fit Changes Everything</p>
         <p className="mt-2 text-gray-600">
           Whether it’s your favorite dress that needs a little tweaking, a suit that could use some sharpening, or jeans that
