@@ -36,7 +36,7 @@ export default function SuitHireSection() {
       <div className="flex justify-center mt-10">
         <a
           href="mailto:sales@townsvillealterationsformalwear.com"
-          className="bg-yellow-400 text-gray-900 font-semibold hover:bg-yellow-500 transition px-6 py-3 rounded-xl shadow-md mb-6"
+          className="bg-yellow-300 text-gray-900 font-semibold hover:bg-yellow-400 transition px-6 py-3 rounded-xl shadow-md mb-6"
         >
           HIRE SUIT NOW
         </a>
