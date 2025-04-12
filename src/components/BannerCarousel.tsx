@@ -4,12 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 const images = [
-    "/3.JPEG",
-    "/4.JPEG",
-    "/5.JPEG",
-    "/6.JPEG",
-    "/8.JPEG",
-    "/9.JPEG",
+    "/3.jpeg",
+    "/4.jpeg",
+    "/5.jpeg",
+    "/6.jpeg",
+    "/8.jpeg",
+    "/9.jpeg",
     "/12.jpeg",
     "/13.jpeg",
 ];
