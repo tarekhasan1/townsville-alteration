@@ -116,7 +116,7 @@ export default function AdminDashboard() {
                         height={200}
                         className="object-cover w-full h-48"
                     />
-                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition">
+                    <div className="absolute top-2 right-2 md:opacity-0 group-hover:opacity-100 transition">
                         <button
                             onClick={() =>
                                 setDeleteModal({
