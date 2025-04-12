@@ -89,15 +89,15 @@ export default function AlterationsSection() {
                 <ul className="mt-6 space-y-4 text-gray-700 text-base">
                     <li className="flex items-center justify-center gap-3">
                         <CheckCircle size={20} className="text-yellow-500" />
-                        Fast Turnaround – Quick, high-quality alterations
+                        Fast Turnaround: Quick, high-quality alterations
                     </li>
                     <li className="flex items-center justify-center gap-3">
                         <CheckCircle size={20} className="text-yellow-500" />
-                        Expert Tailoring – Decades of experience
+                        Expert Tailoring: Decades of experience
                     </li>
                     <li className="flex items-center justify-center gap-3">
                         <CheckCircle size={20} className="text-yellow-500" />
-                        Personalized Service – Every client is unique
+                        Personalised Service: Every client is unique
                     </li>
                 </ul>
             </div>
