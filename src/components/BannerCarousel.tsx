@@ -4,20 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const images = [
-    // "/products/1.jpeg",
-    // "/products/2.jpeg",
-    "/products/3.JPEG",
-    "/products/4.JPEG",
-    "/products/5.JPEG",
-    "/products/6.JPEG",
-    "/products/8.JPEG",
-    "/products/9.JPEG",
-    "/products/12.jpeg",
-    "/products/13.jpeg",
-    // "/products/14.jpeg",
-    // "/products/15.jpeg",
-    // "/products/16.jpeg",
-    // "/products/17.jpeg",
+    "/3.JPEG",
+    "/4.JPEG",
+    "/5.JPEG",
+    "/6.JPEG",
+    "/8.JPEG",
+    "/9.JPEG",
+    "/12.jpeg",
+    "/13.jpeg",
 ];
 
 const BannerCarousel = () => {
