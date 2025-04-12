@@ -1,5 +1,9 @@
 'use client';
+
 import { useState, useEffect } from 'react';
+import AdminDashboard from './AdminDashboard';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '@/firebase/config'; // Adjust the path if needed
 
 export default function AdminPage() {
   const [email, setEmail] = useState('');
@@ -7,19 +11,30 @@ export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check localStorage to persist login across reloads
     const isAuth = localStorage.getItem('admin-authenticated');
     if (isAuth === 'true') {
       setIsLoggedIn(true);
     }
   }, []);
 
-  const handleLogin = () => {
-    if (email === 'admin@example.com' && password === 'password') {
-      setIsLoggedIn(true);
-      localStorage.setItem('admin-authenticated', 'true');
-    } else {
-      alert('Invalid credentials');
+  const handleLogin = async () => {
+    try {
+      const snapshot = await getDocs(collection(db, 'admin'));
+      const credentials = snapshot.docs.map((doc) => doc.data());
+
+      const isMatch = credentials.some(
+        (cred) => cred.email === email && cred.password === password
+      );
+
+      if (isMatch) {
+        setIsLoggedIn(true);
+        localStorage.setItem('admin-authenticated', 'true');
+      } else {
+        alert('Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Error fetching credentials:', error);
+      alert('Login failed. Please try again.');
     }
   };
 
@@ -70,16 +85,8 @@ export default function AdminPage() {
         </button>
       </div>
 
-      {/* You can render your sections here */}
       <div className="space-y-8">
-        <section>
-          <h3 className="text-xl font-semibold mb-4">Latest Products</h3>
-          {/* Upload/Delete/Edit Component */}
-        </section>
-        <section>
-          <h3 className="text-xl font-semibold mb-4">Gallery Section</h3>
-          {/* Upload/Delete/Edit Component */}
-        </section>
+        <AdminDashboard />
       </div>
     </div>
   );
