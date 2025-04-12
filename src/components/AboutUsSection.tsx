@@ -6,7 +6,7 @@ export default function AboutUsSection() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About Us</h2>
             <hr className="w-20 border-yellow-400 border-[3px] mx-auto my-6 rounded-full" />
             <p className="text-gray-700 mx-auto mb-6">
-                We have over almost 40 years of experience in alterations and dressmaking. We specialize in formal 
+                We have over almost 40 years of experience in alterations and dressmaking. We specialise in formal 
                 women’s and menswear – Gowns, Dresses, and Suits. Now, we also offer custom-made suits, sales, and suit hire.
             </p>
             
@@ -20,7 +20,7 @@ export default function AboutUsSection() {
                 <h3 className="font-bold">Our Location & Contact</h3>
                 <p><strong>ADDRESS:</strong> 611 Flinders Street, Townsville</p>
                 <p><strong>PHONE:</strong> 07 47 241368</p>
-                <a href='mailto:Sales@TownsvilleAlterationsFormalWear.com'><strong>EMAIL:</strong> <span className="text-yellow-300">Sales@TownsvilleAlterationsFormalWear.com</span></a>
+                <a href='mailto:sales@tsvalterationsandformalwear.com'><strong>EMAIL:</strong> <span className="text-yellow-300">sales@tsvalterationsandformalwear.com</span></a>
             </div>
         </section>
     );

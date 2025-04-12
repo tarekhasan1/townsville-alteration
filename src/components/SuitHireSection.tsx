@@ -10,7 +10,7 @@ export default function SuitHireSection() {
         </h2>
         <hr className="w-20 border-yellow-400 border-[3px] mx-auto my-6 rounded-full" />
         <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto">
-          Your event is in days, and your wardrobe is failing you. No stress. Our latest styles and timeless classics are delivered to your door in less than 24 hours, anywhere in Australia.
+          Your event is in days, and your wardrobe is failing you. No stress. Our latest styles and timeless classics are available for you, browse out gallery to get the perfect fit.
         </p>
       </div>
 

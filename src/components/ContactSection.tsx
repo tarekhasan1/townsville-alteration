@@ -32,7 +32,7 @@ export default function ContactSection() {
             </div>
             <div>
               <h3 className="font-semibold">EMAIL</h3>
-              <p>Sales@TownsvilleAlterationsFormalWear.com</p>
+              <p>sales@tsvalterationsandformalwear.com</p>
             </div>
             <div>
               <h3 className="font-semibold">SOCIAL</h3>

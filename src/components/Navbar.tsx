@@ -90,7 +90,7 @@ export default function Navbar() {
                         />
                     </a>
                     {/* <User className="text-gray-700 cursor-pointer" size={20} /> */}
-                    <a href="mailto:sales@townsvillealterationsformalwear.com">
+                    <a href="mailto:sales@tsvalterationsandformalwear.com">
                         <Mail
                             className="text-gray-700 cursor-pointer"
                             size={20}
