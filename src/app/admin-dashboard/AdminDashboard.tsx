@@ -148,6 +148,7 @@ export default function AdminDashboard() {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                     <input
+                    className="ps-1 mx-auto w-full border border-dotted border-gray-600"
                         type="file"
                         accept="image/*"
                         onChange={handleFileChange}
@@ -159,7 +160,7 @@ export default function AdminDashboard() {
                                 e.target.value as "gallery" | "featured"
                             )
                         }
-                        className="border hover:bg-gray-50 rounded px-3 py-2"
+                        className="border mx-auto hover:bg-gray-50 rounded px-3 py-2"
                     >
                         <option value="gallery">Gallery</option>
                         <option value="featured">Featured</option>
