@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     title: "Townsville Alterations and Formal Wear",
     description: " - Reinvent Your Wardrobe. Or Hire One That Turns Heads.",
-    icons: "/logo.png",
+    // icons: "/logo.png",
 };
 
 export default function RootLayout({
