@@ -24,8 +24,9 @@ type ImageData = { id: string; url: string };
 export default function AdminDashboard() {
     const [gallery, setGallery] = useState<ImageData[]>([]);
     const [featured, setFeatured] = useState<ImageData[]>([]);
+    const [suits, setSuits] = useState<ImageData[]>([]);
     const [file, setFile] = useState<File | null>(null);
-    const [uploadTarget, setUploadTarget] = useState<"gallery" | "featured">(
+    const [uploadTarget, setUploadTarget] = useState<"gallery" | "featured" | "suits">(
         "gallery"
     );
     const [uploading, setUploading] = useState(false);
@@ -46,6 +47,7 @@ export default function AdminDashboard() {
         };
         setGallery(await fetchFrom("gallery"));
         setFeatured(await fetchFrom("featured"));
+        setSuits(await fetchFrom("suits"));
     };
 
     useEffect(() => {
@@ -101,7 +103,7 @@ export default function AdminDashboard() {
 
     const renderImageGrid = (
         images: ImageData[],
-        collection: "gallery" | "featured"
+        collection: "gallery" | "featured" | "suits"
     ) => (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {images.map((img, i) => (
@@ -164,6 +166,7 @@ export default function AdminDashboard() {
                     >
                         <option value="gallery">Gallery</option>
                         <option value="featured">Featured</option>
+                        <option value="suits">Suits</option>
                     </select>
                     <button
                         onClick={handleUpload}
@@ -185,6 +188,12 @@ export default function AdminDashboard() {
             <section>
                 <h2 className="text-2xl font-semibold mb-4">Gallery</h2>
                 {renderImageGrid(gallery, "gallery")}
+            </section>
+
+            {/* Suit Section */}
+            <section>
+                <h2 className="text-2xl font-semibold mb-4">Suits</h2>
+                {renderImageGrid(suits, "suits")}
             </section>
 
             {/* Delete Confirmation Modal */}

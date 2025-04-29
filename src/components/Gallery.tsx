@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -36,10 +36,14 @@ export default function Gallery() {
     return (
         <section
             id="gallery"
+            aria-labelledby="gallery-heading"
             className="bg-gradient-to-br from-white to-yellow-50 py-16 px-6 md:px-12 lg:px-24 text-gray-800"
         >
             <div className="max-w-6xl mx-auto text-center">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h2
+                    id="gallery-heading"
+                    className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
+                >
                     Gallery
                 </h2>
                 <hr className="w-20 border-yellow-400 border-[3px] mx-auto my-6 rounded-full" />
@@ -60,6 +64,7 @@ export default function Gallery() {
                                 width={400}
                                 height={500}
                                 className="w-full h-72 object-cover"
+                                loading="lazy"  // Add lazy loading for SEO
                             />
                         </div>
                     ))}

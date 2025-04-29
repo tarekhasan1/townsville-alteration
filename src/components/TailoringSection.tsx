@@ -3,11 +3,11 @@ import Image from "next/image";
 
 export default function TailoringSection() {
   return (
-    <section className="bg-[#f0f1e6] py-16 px-6 md:px-16 lg:px-24">
+    <section id="tailoring-section" aria-labelledby="tailoring-section" className="bg-[#f0f1e6] py-16 px-6 md:px-16 lg:px-24">
       <div className="mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
         <div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 id="tailoring-section" className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Tailoring Perfection, One Stitch at a Time.
           </h2>
           <hr className="mb-4 md:mb-8 border-[2px] text-yellow-300"/>
@@ -24,7 +24,7 @@ export default function TailoringSection() {
           <div className="relative w-full h-30 md:h-40">
             <Image
               src="/tailored-suit.jpg"
-              alt="Tailored suits"
+              alt="Tailored custom suits in Townsville"
               layout="fill"
               objectFit="cover"
               className="rounded-lg"
@@ -33,7 +33,7 @@ export default function TailoringSection() {
           <div className="relative w-full h-60 md:h-80">
             <Image
               src="/tape.jpg"
-              alt="Measuring tape"
+              alt="Measuring tape representing precision tailoring in Townsville"
               layout="fill"
               objectFit="cover"
               className="rounded-lg"
