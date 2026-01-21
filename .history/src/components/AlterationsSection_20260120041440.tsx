@@ -104,7 +104,7 @@ export default function AlterationsSection() {
 
             <div className="flex justify-center mt-12">
                 <a
-                    href="mailto:tranglecong2014@gmail.com"
+                    href="mailto:sales@townsvillealterationsformalwear.com"
                     className="bg-yellow-300 text-gray-900 font-semibold hover:bg-yellow-400 transition px-6 py-3 rounded-xl shadow-md"
                 >
                     Send Measurements

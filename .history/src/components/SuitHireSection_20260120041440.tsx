@@ -55,7 +55,7 @@ export default function SuitHireSection() {
 
       <div className="flex justify-center mt-10">
         <a
-          href="mailto:tranglecong2014@gmail.com?subject=Suit Hire Inquiry"
+          href="mailto:sales@townsvillealterationsformalwear.com"
           className="bg-yellow-300 text-gray-900 font-semibold hover:bg-yellow-400 transition px-6 py-3 rounded-xl shadow-md mb-6"
           aria-label="Hire a suit now via email"
         >
