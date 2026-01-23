@@ -175,7 +175,7 @@ export default function DashboardHeader({ activeSection, onUploadClick, stats }:
           </div>
 
           {/* Messages Stats */}
-          {/* <div className="mt-8">
+          <div className="mt-8">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-semibold text-gray-800">Customer Messages</h3>
               <div className="text-sm text-gray-500">
@@ -246,7 +246,7 @@ export default function DashboardHeader({ activeSection, onUploadClick, stats }:
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
         </>
       )}
       
