@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // AdminDashboard.tsx
 'use client';
 

@@ -44,7 +44,7 @@ export default function Navbar() {
         <header className="bg-yellow-300 py-4 px-4 md:px-6 shadow-md fixed w-full z-50">
             <div className="container mx-auto flex items-center justify-between">
                 {/* Mobile Menu Button */}
-                <div className="xl:hidden">
+                <div className="lg:hidden">
                     <button
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Toggle menu"
@@ -66,7 +66,7 @@ export default function Navbar() {
                 </Link>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden xl:flex items-center space-x-5">
+                <nav className="hidden lg:flex items-center space-x-5">
                     {NAV_ITEMS.map((item) =>
                         item.children ? (
                             <div key={item.name} className="relative group">
@@ -81,7 +81,7 @@ export default function Navbar() {
                                             key={child.href}
                                             href={child.href}
                                             className={clsx(
-                                                "block px-4 py-2 hover:bg-yellow-100",
+                                                "block px-4 lg:px-2 xxl:px-4 py-2 hover:bg-yellow-100",
                                                 pathname === child.href &&
                                                     "bg-yellow-200 font-semibold"
                                             )}

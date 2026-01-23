@@ -1,8 +1,7 @@
-// components/ContactForm.tsx
+// components/CompactContactForm.tsx
 'use client';
 
 import { useState } from 'react';
-import { submitContactForm } from '../../actions/contact.action';
 
 interface FormData {
   name: string;
@@ -12,31 +11,23 @@ interface FormData {
   service?: string;
 }
 
-export default function ContactForm() {
+export default function CompactContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     phone: '',
     email: '',
     message: '',
-    service: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value,
-    }));
-  };
-
-  const handleServiceChange = (service: string) => {
-    setFormData(prev => ({
-      ...prev,
-      service,
     }));
   };
 
@@ -60,16 +51,25 @@ export default function ContactForm() {
     }
 
     try {
-      // Submit to database
-      const result = await submitContactForm({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        message: formData.message,
-        service: formData.service,
+      const form = e.currentTarget;
+      const formDataObj = new FormData(form);
+      
+      // Add custom fields to form data
+      formDataObj.append('name', formData.name);
+      formDataObj.append('phone', formData.phone);
+      formDataObj.append('message', formData.message);
+      formDataObj.append('_subject', `Website Contact Form - ${formData.name}`);
+      formDataObj.append('_replyto', formData.email);
+      
+      const response = await fetch('https://formspree.io/f/mdaawgll', {
+        method: 'POST',
+        body: formDataObj,
+        headers: {
+          'Accept': 'application/json',
+        },
       });
 
-      if (result.success) {
+      if (response.ok) {
         setSubmitStatus('success');
         // Reset form
         setFormData({
@@ -77,9 +77,11 @@ export default function ContactForm() {
           phone: '',
           email: '',
           message: '',
-          service: '',
         });
+        // Reset form element
+        if (form) form.reset();
       } else {
+        const result = await response.json();
         throw new Error(result.error || 'Form submission failed');
       }
     } catch (error) {
@@ -92,51 +94,60 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="max-h-[600px] overflow-visible">
       <form 
         onSubmit={handleSubmit} 
         className="space-y-3"
+        method="POST"
+        action="https://formspree.io/f/mdaawgll"
       >
-        {/* Success Message */}
+        {/* Success Message - Ultra Compact */}
         {submitStatus === 'success' && (
           <div className="p-2 bg-green-50 border border-green-200 rounded text-xs">
             <div className="flex items-center">
-              <svg className="w-3 h-3 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 text-green-500 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Message sent successfully! We&apos;ll get back to you soon.</span>
+              <span className="text-green-700">
+                Message sent successfully. We&apos;ll get back to you soon.
+              </span>
             </div>
           </div>
         )}
 
-        {/* Error Message */}
+        {/* Error Message - Ultra Compact */}
         {submitStatus === 'error' && (
           <div className="p-2 bg-red-50 border border-red-200 rounded text-xs">
             <div className="flex items-center">
-              <svg className="w-3 h-3 text-red-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 text-red-500 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.196 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
-              <span>{errorMessage || 'Error sending message'}</span>
+              <span className="text-red-700">
+                {errorMessage || 'Something went wrong. Please try again.'}
+              </span>
             </div>
           </div>
         )}
 
-        {/* Validation Error */}
+        {/* Validation Error - Ultra Compact */}
         {errorMessage && submitStatus === 'idle' && (
           <div className="p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
             <div className="flex items-center">
-              <svg className="w-3 h-3 text-yellow-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 text-yellow-500 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.196 16.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
-              <span>{errorMessage}</span>
+              <span className="text-yellow-700">{errorMessage}</span>
             </div>
           </div>
         )}
 
-        {/* Name Field */}
+        {/* Hidden honeypot field for spam protection */}
+        <input type="hidden" name="_gotcha" style={{display: 'none'}} />
+
+        {/* Name Field - Compact */}
         <div>
           <label htmlFor="name" className="block text-xs font-medium text-gray-700 mb-1">
-            Name *
+            Full Name *
           </label>
           <input
             type="text"
@@ -145,14 +156,15 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-yellow-400 focus:border-transparent"
+            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-yellow-400 focus:border-transparent transition outline-none"
             placeholder="Your name"
             disabled={isSubmitting}
           />
         </div>
 
-        {/* Contact Info Grid */}
-        <div className="grid grid-cols-2 gap-3">
+        {/* Contact Info Grid - Ultra Compact */}
+        <div className="grid grid-cols-2 gap-2">
+          {/* Phone Field */}
           <div>
             <label htmlFor="phone" className="block text-xs font-medium text-gray-700 mb-1">
               Phone
@@ -163,12 +175,13 @@ export default function ContactForm() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-yellow-400 focus:border-transparent"
-              placeholder="Phone number"
+              className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-yellow-400 focus:border-transparent transition outline-none"
+              placeholder="Phone"
               disabled={isSubmitting}
             />
           </div>
 
+          {/* Email Field */}
           <div>
             <label htmlFor="email" className="block text-xs font-medium text-gray-700 mb-1">
               Email *
@@ -180,14 +193,14 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-yellow-400 focus:border-transparent"
-              placeholder="Email address"
+              className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-yellow-400 focus:border-transparent transition outline-none"
+              placeholder="Email"
               disabled={isSubmitting}
             />
           </div>
         </div>
 
-        {/* Message Field */}
+        {/* Message Field - Very Small */}
         <div>
           <label htmlFor="message" className="block text-xs font-medium text-gray-700 mb-1">
             Message *
@@ -198,46 +211,63 @@ export default function ContactForm() {
             value={formData.message}
             onChange={handleChange}
             required
-            rows={3}
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-yellow-400 focus:border-transparent resize-none"
+            rows={2}
+            className="w-full px-2 py-1.5 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-yellow-400 focus:border-transparent transition outline-none resize-none"
             placeholder="Your message..."
             disabled={isSubmitting}
           />
         </div>
 
-        {/* Service Selection */}
+        {/* Service Type Selection - Single Row */}
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-2">
-            Service:
+          <label className="block text-xs font-medium text-gray-700 mb-1">
+            Service Needed:
           </label>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-1">
             {['Alterations', 'Suit Hire', 'Wedding', 'Other'].map((service) => (
-              <label key={service} className="inline-flex items-center cursor-pointer">
+              <label
+                key={service}
+                className="flex items-center px-2 py-1 border border-gray-300 rounded hover:bg-gray-50 cursor-pointer text-xs"
+              >
                 <input
                   type="radio"
                   name="service"
                   value={service.toLowerCase()}
-                  checked={formData.service === service.toLowerCase()}
-                  onChange={() => handleServiceChange(service.toLowerCase())}
-                  className="w-4 h-4 text-yellow-500 bg-gray-100 border-gray-300 focus:ring-yellow-400"
+                  className="mr-1 text-yellow-500 focus:ring-yellow-400 w-2.5 h-2.5"
                   disabled={isSubmitting}
+                  onChange={handleChange}
                 />
-                <span className="ml-2 text-sm text-gray-700">{service}</span>
+                <span>{service}</span>
               </label>
             ))}
           </div>
         </div>
 
-        {/* Submit Button */}
+        {/* File Upload - Minimal */}
         <div>
+          <label htmlFor="upload" className="block text-xs font-medium text-gray-700 mb-1">
+            Attach Photos (Optional)
+          </label>
+          <input
+            type="file"
+            id="upload"
+            name="upload"
+            className="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-yellow-400 focus:border-transparent transition outline-none file:mr-2 file:py-0.5 file:px-2 file:rounded file:border-0 file:text-xs file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100"
+            accept="image/*"
+            disabled={isSubmitting}
+          />
+        </div>
+
+        {/* Submit Button - Compact */}
+        <div className="pt-1">
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-medium py-2.5 rounded-lg transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-semibold py-2 px-3 rounded transition-all duration-300 shadow-sm hover:shadow disabled:opacity-50 disabled:cursor-not-allowed text-xs"
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center">
-                <svg className="animate-spin h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>

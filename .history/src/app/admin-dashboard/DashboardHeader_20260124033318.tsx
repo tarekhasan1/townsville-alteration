@@ -57,7 +57,7 @@ export default function DashboardHeader({ activeSection, onUploadClick, stats }:
               <span className="relative">
                 <span className="animate-ping absolute -top-1 -right-1 h-2 w-2 rounded-full bg-yellow-500 opacity-75"></span>
                 <span className="relative inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
-                  {stats.messages?.new} new
+                  {stats?.messages.new} new
                 </span>
               </span>
             )}
@@ -173,24 +173,14 @@ export default function DashboardHeader({ activeSection, onUploadClick, stats }:
                 </div>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className={`p-4 rounded-xl border ${
-                  stats.messages.new > 0 
-                    ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-yellow-200' 
-                    : 'bg-gradient-to-br from-gray-50 to-gray-100 border-gray-200'
-                }`}>
+                <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 rounded-xl border border-yellow-200">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className={`text-2xl font-bold ${stats.messages.new > 0 ? 'text-yellow-700' : 'text-gray-700'}`}>
-                        {stats.messages.new}
-                      </div>
-                      <div className={`text-sm ${stats.messages.new > 0 ? 'text-yellow-600' : 'text-gray-600'} mt-1`}>
-                        New
-                      </div>
+                      <div className="text-2xl font-bold text-yellow-700">{stats.messages.new}</div>
+                      <div className="text-sm text-yellow-600 mt-1">New</div>
                     </div>
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      stats.messages.new > 0 ? 'bg-yellow-200' : 'bg-gray-200'
-                    }`}>
-                      <span className={stats.messages.new > 0 ? 'text-yellow-700' : 'text-gray-700'}>📨</span>
+                    <div className="w-10 h-10 rounded-lg bg-yellow-200 flex items-center justify-center">
+                      <span className="text-yellow-700">📨</span>
                     </div>
                   </div>
                   {stats.messages.new > 0 && (

@@ -2,7 +2,6 @@
 'use client';
 
 import { useState } from 'react';
-import { submitContactForm } from '../../actions/contact.action';
 
 interface FormData {
   name: string;
@@ -18,25 +17,17 @@ export default function ContactForm() {
     phone: '',
     email: '',
     message: '',
-    service: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value,
-    }));
-  };
-
-  const handleServiceChange = (service: string) => {
-    setFormData(prev => ({
-      ...prev,
-      service,
     }));
   };
 
@@ -60,16 +51,25 @@ export default function ContactForm() {
     }
 
     try {
-      // Submit to database
-      const result = await submitContactForm({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        message: formData.message,
-        service: formData.service,
+      const form = e.currentTarget;
+      const formDataObj = new FormData(form);
+      
+      // Add custom fields to form data
+      formDataObj.append('name', formData.name);
+      formDataObj.append('phone', formData.phone);
+      formDataObj.append('message', formData.message);
+      formDataObj.append('_subject', `Website Contact Form - ${formData.name}`);
+      formDataObj.append('_replyto', formData.email);
+      
+      const response = await fetch('https://formspree.io/f/mdaawgll', {
+        method: 'POST',
+        body: formDataObj,
+        headers: {
+          'Accept': 'application/json',
+        },
       });
 
-      if (result.success) {
+      if (response.ok) {
         setSubmitStatus('success');
         // Reset form
         setFormData({
@@ -77,9 +77,11 @@ export default function ContactForm() {
           phone: '',
           email: '',
           message: '',
-          service: '',
         });
+        // Reset form element
+        if (form) form.reset();
       } else {
+        const result = await response.json();
         throw new Error(result.error || 'Form submission failed');
       }
     } catch (error) {
@@ -93,9 +95,17 @@ export default function ContactForm() {
 
   return (
     <div className="w-full max-w-md mx-auto">
+      {/* Compact Title and Description
+      <div className="mb-4 text-center">
+        <h2 className="text-lg font-semibold text-gray-900 mb-1">Contact Us</h2>
+        <p className="text-xs text-gray-600">Fill out the form below and we&apos;ll get back to you</p>
+      </div> */}
+
       <form 
         onSubmit={handleSubmit} 
         className="space-y-3"
+        method="POST"
+        action="https://formspree.io/f/mdaawgll"
       >
         {/* Success Message */}
         {submitStatus === 'success' && (
@@ -104,7 +114,7 @@ export default function ContactForm() {
               <svg className="w-3 h-3 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Message sent successfully! We&apos;ll get back to you soon.</span>
+              <span>Message sent successfully!</span>
             </div>
           </div>
         )}
@@ -132,6 +142,9 @@ export default function ContactForm() {
             </div>
           </div>
         )}
+
+        {/* Hidden honeypot field */}
+        <input type="hidden" name="_gotcha" style={{display: 'none'}} />
 
         {/* Name Field */}
         <div>
@@ -187,7 +200,7 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Message Field */}
+        {/* Message Field - Very Compact */}
         <div>
           <label htmlFor="message" className="block text-xs font-medium text-gray-700 mb-1">
             Message *
@@ -198,34 +211,48 @@ export default function ContactForm() {
             value={formData.message}
             onChange={handleChange}
             required
-            rows={3}
+            rows={2}
             className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-yellow-400 focus:border-transparent resize-none"
             placeholder="Your message..."
             disabled={isSubmitting}
           />
         </div>
 
-        {/* Service Selection */}
+        {/* Service Selection - Compact Single Line */}
         <div>
           <label className="block text-xs font-medium text-gray-700 mb-2">
             Service:
           </label>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             {['Alterations', 'Suit Hire', 'Wedding', 'Other'].map((service) => (
-              <label key={service} className="inline-flex items-center cursor-pointer">
+              <label key={service} className="inline-flex items-center">
                 <input
                   type="radio"
                   name="service"
                   value={service.toLowerCase()}
-                  checked={formData.service === service.toLowerCase()}
-                  onChange={() => handleServiceChange(service.toLowerCase())}
-                  className="w-4 h-4 text-yellow-500 bg-gray-100 border-gray-300 focus:ring-yellow-400"
+                  className="w-3 h-3 text-yellow-500 mr-1"
                   disabled={isSubmitting}
+                  onChange={handleChange}
                 />
-                <span className="ml-2 text-sm text-gray-700">{service}</span>
+                <span className="text-xs">{service}</span>
               </label>
             ))}
           </div>
+        </div>
+
+        {/* File Upload - Compact */}
+        <div>
+          <label htmlFor="upload" className="block text-xs font-medium text-gray-700 mb-1">
+            Attach Photos
+          </label>
+          <input
+            type="file"
+            id="upload"
+            name="upload"
+            className="w-full text-xs file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:bg-yellow-50 file:text-yellow-700"
+            accept="image/*"
+            disabled={isSubmitting}
+          />
         </div>
 
         {/* Submit Button */}
@@ -233,7 +260,7 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-medium py-2.5 rounded-lg transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-medium py-2.5 rounded-lg transition-all text-sm"
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center">

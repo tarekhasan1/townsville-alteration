@@ -44,7 +44,7 @@ export default function Navbar() {
         <header className="bg-yellow-300 py-4 px-4 md:px-6 shadow-md fixed w-full z-50">
             <div className="container mx-auto flex items-center justify-between">
                 {/* Mobile Menu Button */}
-                <div className="xl:hidden">
+                <div className="lg:hidden">
                     <button
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Toggle menu"

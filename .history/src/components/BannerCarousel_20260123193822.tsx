@@ -67,7 +67,7 @@ const BannerCarousel = () => {
           <a
             href="tel:0421929683"
             aria-label="Call Townsville Alterations and Formal Wear"
-            className="hidden md:flex items-center justify-center gap-2 bg-green-600 px-6 py-3 text-white hover:bg-green-700 transition-all"
+            className="flex items-center justify-center gap-2 bg-green-600 px-6 py-3 text-white hover:bg-green-700 transition-all"
           >
             <Phone className="w-4 h-4" />
             Call Us
