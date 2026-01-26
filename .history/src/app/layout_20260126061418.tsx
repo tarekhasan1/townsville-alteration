@@ -3,7 +3,6 @@ import Script from "next/script";
 import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
 import FloatingCallButton from "@/components/FloatingCallButton";
-import AnalyticsTracker from "@/components/AnalyticsTracker";
 
 export const metadata: Metadata = {
   title: "Townsville Alterations and Formal Wear | Tailoring, Suit Hire, Alterations",
@@ -57,7 +56,6 @@ export default function RootLayout({
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-        <AnalyticsTracker />
 
         <LayoutShell>{children}</LayoutShell>
 
