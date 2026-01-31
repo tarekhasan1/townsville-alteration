@@ -7,7 +7,7 @@ export default function AboutUsSection() {
     return (
         <section className="bg-white py-12 px-6 md:px-12 lg:px-24 text-gray-800">
             <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start mb-10">
+                <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
                     {/* Left Column - About Us Content */}
                     <div className="lg:w-1/2">
                         <div className="text-center lg:text-left">

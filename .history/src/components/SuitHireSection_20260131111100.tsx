@@ -44,7 +44,7 @@ export default function SuitHireSection() {
 
         {/* How It Works Section */}
                     {/* Suit Icon */}
-            <div className="flex justify-center my-10" role="img" aria-label="Suit icon">
+            <div className="flex justify-center lg:justify-start my-10" role="img" aria-label="Suit icon">
               <div className="w-24 md:w-48 h-24 md:h-48 bg-black rounded-full flex items-center justify-center shadow-md">
                 <span className="text-white text-4xl md:text-7xl">👔</span>
               </div>

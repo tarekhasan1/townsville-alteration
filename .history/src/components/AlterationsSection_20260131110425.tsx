@@ -12,7 +12,7 @@ export default function AlterationsSection() {
                     {/* Left Column */}
                     <div className="lg:w-1/2">
                         <div className="max-w-4xl text-center lg:text-left">
-                            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900">
+                            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
                                 Clothing Alterations & Repairs
                             </h1>
                             <hr className="w-20 border-yellow-400 border-[3px] mx-auto lg:mx-0 my-6 rounded-full" />

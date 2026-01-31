@@ -33,7 +33,7 @@ export default function WeddingSuitsPage() {
   return (
     <main className='pt-[80px]'>
       {/* Hero Section */}
-      <section className="relative w-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 md:py-24 px-6">
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 md:py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
             {/* Left Column */}
@@ -42,7 +42,7 @@ export default function WeddingSuitsPage() {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                   Wedding Suits Collection
                 </h1>
-                <div className="w-24 h-1 bg-yellow-400 lg:mx-0 mb-8 mx-auto"></div>
+                <div className="w-24 h-1 bg-yellow-400 mb-8 mx-auto"></div>
                 <p className="text-xl md:text-2xl text-gray-300 mb-10">
                   Elegant and sophisticated wedding suits tailored for the modern groom. 
                   Hire or purchase premium suits for your special day.
@@ -71,7 +71,7 @@ export default function WeddingSuitsPage() {
             </div>
 
             {/* Right Column - Contact Form */}
-            <div className="lg:w-1/2 text-gray-300">
+            <div className="lg:w-1/2">
               <ContactForm />
             </div>
           </div>

@@ -45,13 +45,13 @@ const BannerCarousel = () => {
 
       {/* Right Column - Content with Contact Form */}
       <div className="w-full lg:w-1/2 text-center lg:text-left mt-6 lg:mt-0 px-6">
-        {/* <h2 className="text-gray-800 text-lg uppercase tracking-wider text-center font-medium">
+        <h2 className="text-gray-800 text-lg uppercase tracking-wider">
           Reinvent Your Wardrobe. Or Hire One That Turns Heads.
-        </h2> */}
+        </h2>
 
-        {/* <h2 className="text-2xl lg:text-3xl font-semibold text-center uppercase text-gray-900 mt-4">
+        <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mt-4">
           Townsville Alterations & Formal Wear
-        </h2> */}
+        </h2>
 
         {/* Contact Form Integrated Here */}
         <div className="mt-8">
@@ -59,7 +59,7 @@ const BannerCarousel = () => {
         </div>
 
         {/* CTA Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:justify-center">
+        <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:justify-center lg:justify-start">
           {/* Learn More */}
           <Link
             href="/about-us"

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 export default function WeddingSuitsPage() {
   return (
-    <main className='pt-[80px]'>
+    <main className='pt-[80px] w-screen'>
       {/* Hero Section */}
       <section className="relative w-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 md:py-24 px-6">
         <div className="max-w-7xl mx-auto">
@@ -71,7 +71,7 @@ export default function WeddingSuitsPage() {
             </div>
 
             {/* Right Column - Contact Form */}
-            <div className="lg:w-1/2 text-gray-300">
+            <div className="lg:w-1/2">
               <ContactForm />
             </div>
           </div>

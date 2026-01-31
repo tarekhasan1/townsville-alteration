@@ -71,7 +71,7 @@ export default function WeddingSuitsPage() {
             </div>
 
             {/* Right Column - Contact Form */}
-            <div className="lg:w-1/2 text-gray-300">
+            <div className="lg:w-1/2">
               <ContactForm />
             </div>
           </div>

@@ -12,14 +12,14 @@ export default function AlterationsSection() {
                     {/* Left Column */}
                     <div className="lg:w-1/2">
                         <div className="max-w-4xl text-center lg:text-left">
-                            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900">
+                            <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
                                 Clothing Alterations & Repairs
                             </h1>
                             <hr className="w-20 border-yellow-400 border-[3px] mx-auto lg:mx-0 my-6 rounded-full" />
                             <p className="text-xl font-semibold">
                                 Because the Perfect Fit Changes Everything
                             </p>
-                            <p className="mt-4 text-gray-600 text-xs sm:text-base md:text-lg leading-relaxed">
+                            <p className="mt-4 text-gray-600 text-base md:text-lg leading-relaxed">
                                 Whether it&apos;s your favorite dress that needs a little
                                 tweaking, a suit that could use some sharpening, or jeans
                                 that just don&apos;t fit quite right—our expert tailoring team
@@ -29,7 +29,7 @@ export default function AlterationsSection() {
                     </div>
 
                     {/* Right Column - Contact Form */}
-                    <div className="lg:w-1/2 flex items-center justify-center w-full">
+                    <div className="lg:w-1/2">
                         <ContactForm />
                     </div>
                 </div>

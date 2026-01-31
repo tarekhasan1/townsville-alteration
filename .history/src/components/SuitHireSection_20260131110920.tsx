@@ -35,8 +35,8 @@ export default function SuitHireSection() {
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="lg:w-1/2  flex items-center justify-center w-full">
-            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+          <div className="lg:w-1/2">
+            <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex items-center justify-center w-full">
               <ContactForm />
             </div>
           </div>
@@ -44,9 +44,9 @@ export default function SuitHireSection() {
 
         {/* How It Works Section */}
                     {/* Suit Icon */}
-            <div className="flex justify-center my-10" role="img" aria-label="Suit icon">
-              <div className="w-24 md:w-48 h-24 md:h-48 bg-black rounded-full flex items-center justify-center shadow-md">
-                <span className="text-white text-4xl md:text-7xl">👔</span>
+            <div className="flex justify-center lg:justify-start my-10" role="img" aria-label="Suit icon">
+              <div className="w-24 h-24 bg-black rounded-full flex items-center justify-center shadow-md">
+                <span className="text-white text-4xl">👔</span>
               </div>
             </div>
         <div

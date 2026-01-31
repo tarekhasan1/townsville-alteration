@@ -43,7 +43,7 @@ export default function WeddingGownsPage() {
                   Wedding Gowns Collection
                 </h1>
                 <div className="w-24 h-1 bg-pink-400 lg:mx-0 mb-8 mx-auto"></div>
-                <p className="text-base md:text-2xl text-gray-600 mb-10">
+                <p className="text-xl md:text-2xl text-gray-600 mb-10">
                   Discover your dream wedding gown. From elegant designer dresses to custom creations, 
                   find the perfect dress for your special day.
                 </p>

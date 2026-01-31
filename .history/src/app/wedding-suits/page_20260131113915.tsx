@@ -33,8 +33,8 @@ export default function WeddingSuitsPage() {
   return (
     <main className='pt-[80px]'>
       {/* Hero Section */}
-      <section className="relative w-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 md:py-24 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 md:py-24">
+        <div className=" mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
             {/* Left Column */}
             <div className="lg:w-1/2">
@@ -71,7 +71,7 @@ export default function WeddingSuitsPage() {
             </div>
 
             {/* Right Column - Contact Form */}
-            <div className="lg:w-1/2 text-gray-300">
+            <div className="lg:w-1/2">
               <ContactForm />
             </div>
           </div>
