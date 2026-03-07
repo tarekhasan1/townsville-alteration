@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { submitContactForm } from '../../actions/contact.action';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
   name: string;
@@ -24,6 +25,7 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -79,6 +81,8 @@ export default function ContactForm() {
           message: '',
           service: '',
         });
+        // Redirect to success page
+        router.push('/contact/success');
       } else {
         throw new Error(result.error || 'Form submission failed');
       }

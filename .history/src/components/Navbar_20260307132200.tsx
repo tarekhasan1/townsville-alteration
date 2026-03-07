@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from "react";
@@ -26,6 +25,7 @@ const NAV_ITEMS = [
     { name: "Gallery", href: "/gallery" },
     { name: "FAQ", href: "/faq" },
     { name: "About Us", href: "/about-us" },
+    { name: "Contact", href: "/contact" },
 ];
 
 const PHONE_NUMBER = "0421929683";
@@ -33,17 +33,22 @@ const PHONE_NUMBER = "0421929683";
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isDesktopDropdownOpen, setIsDesktopDropdownOpen] = useState(false);
     const pathname = usePathname();
 
     const handleCallClick = () => {
         window.location.href = `tel:${PHONE_NUMBER}`;
     };
 
+    const toggleDesktopDropdown = () => {
+        setIsDesktopDropdownOpen(!isDesktopDropdownOpen);
+    };
+
     return (
         <header className="bg-yellow-300 py-4 px-4 md:px-6 shadow-md fixed w-full z-50">
             <div className="container mx-auto flex items-center justify-between">
                 {/* Mobile Menu Button */}
-                <div className="lg:hidden">
+                <div className="xl:hidden">
                     <button
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Toggle menu"
@@ -65,30 +70,53 @@ export default function Navbar() {
                 </Link>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden lg:flex items-center space-x-5">
+                <nav className="hidden xl:flex items-center space-x-5">
                     {NAV_ITEMS.map((item) =>
                         item.children ? (
-                            <div key={item.name} className="relative group">
-                                <button className="flex items-center gap-1 text-gray-700 hover:text-gray-900 whitespace-nowrap">
+                            <div key={item.name} className="relative">
+                                <button
+                                    onClick={toggleDesktopDropdown}
+                                    className="flex items-center gap-1 text-gray-700 hover:text-gray-900 whitespace-nowrap focus:outline-none"
+                                    aria-expanded={isDesktopDropdownOpen}
+                                    aria-haspopup="true"
+                                >
                                     {item.name}
-                                    <ChevronDown size={16} />
+                                    <ChevronDown 
+                                        size={16} 
+                                        className={clsx(
+                                            "transition-transform duration-200",
+                                            isDesktopDropdownOpen && "rotate-180"
+                                        )}
+                                    />
                                 </button>
 
-                                <div className="absolute left-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-md min-w-[220px] z-50">
-                                    {item.children.map((child) => (
-                                        <Link
-                                            key={child.href}
-                                            href={child.href}
-                                            className={clsx(
-                                                "block px-4 py-2 hover:bg-yellow-100",
-                                                pathname === child.href &&
-                                                    "bg-yellow-200 font-semibold"
-                                            )}
-                                        >
-                                            {child.name}
-                                        </Link>
-                                    ))}
-                                </div>
+                                {isDesktopDropdownOpen && (
+                                    <>
+                                        {/* Backdrop to close dropdown when clicking outside */}
+                                        <div 
+                                            className="fixed inset-0 z-40"
+                                            onClick={() => setIsDesktopDropdownOpen(false)}
+                                        />
+                                        
+                                        {/* Dropdown menu */}
+                                        <div className="absolute left-0 mt-2 bg-white shadow-lg rounded-md min-w-[220px] z-50">
+                                            {item.children.map((child) => (
+                                                <Link
+                                                    key={child.href}
+                                                    href={child.href}
+                                                    onClick={() => setIsDesktopDropdownOpen(false)}
+                                                    className={clsx(
+                                                        "block px-4 py-2 hover:bg-yellow-100",
+                                                        pathname === child.href &&
+                                                            "bg-yellow-200 font-semibold"
+                                                    )}
+                                                >
+                                                    {child.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         ) : (
                             <Link
@@ -108,25 +136,26 @@ export default function Navbar() {
 
                 {/* Right Section */}
                 <div className="flex items-center space-x-3">
-                    <button
-                        onClick={handleCallClick}
-                        className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold shadow"
-                    >
-                        <Phone size={18} />
-                        <span className="hidden md:inline">Call Now</span>
-                    </button>
-
                     <div className="hidden md:flex items-center space-x-3">
-                        <a href="https://www.instagram.com/tsvalterationformal" target="_blank">
+                        <a href="https://www.instagram.com/tsvalterationformal" target="_blank" rel="noopener noreferrer">
                             <Instagram size={20} />
                         </a>
-                        <a href="https://www.facebook.com/DressmakingAlterationsTownsville" target="_blank">
+                        <a href="https://www.facebook.com/DressmakingAlterationsTownsville" target="_blank" rel="noopener noreferrer">
                             <Facebook size={20} />
                         </a>
                         <a href="mailto:tranglecong2014@gmail.com">
                             <Mail size={20} />
                         </a>
                     </div>
+                    
+                    <button
+                        onClick={handleCallClick}
+                        className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold shadow whitespace-nowrap"
+                    >
+                        <Phone size={18} />
+                        <span className="hidden md:inline">{PHONE_NUMBER}</span>
+                        <span className="md:hidden">Call Now</span>
+                    </button>
                 </div>
             </div>
 
@@ -138,13 +167,14 @@ export default function Navbar() {
                             <div key={item.name}>
                                 <button
                                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                    className="w-full flex justify-between items-center py-3 px-4 rounded-md hover:bg-yellow-100"
+                                    className="w-full flex justify-between items-center py-3 px-4 rounded-md hover:bg-yellow-100 focus:outline-none"
+                                    aria-expanded={isDropdownOpen}
                                 >
                                     {item.name}
                                     <ChevronDown
                                         size={18}
                                         className={clsx(
-                                            "transition-transform",
+                                            "transition-transform duration-200",
                                             isDropdownOpen && "rotate-180"
                                         )}
                                     />
@@ -156,7 +186,10 @@ export default function Navbar() {
                                             <Link
                                                 key={child.href}
                                                 href={child.href}
-                                                onClick={() => setIsOpen(false)}
+                                                onClick={() => {
+                                                    setIsOpen(false);
+                                                    setIsDropdownOpen(false);
+                                                }}
                                                 className={clsx(
                                                     "block py-2 px-4 rounded-md hover:bg-yellow-100",
                                                     pathname === child.href &&
