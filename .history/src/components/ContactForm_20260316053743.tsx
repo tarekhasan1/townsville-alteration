@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // components/ContactForm.tsx
 'use client';
 
@@ -6,13 +5,13 @@ import { useState, useEffect } from 'react';
 import { submitContactForm } from '../../actions/contact.action';
 import { useRouter } from 'next/navigation';
 
-// REMOVE THIS ENTIRE DECLARATION BLOCK
-// declare global {
-//   interface Window {
-//     dataLayer?: any[];
-//     gtag?: (...args: any[]) => void;
-//   }
-// }
+// Declare global window types
+declare global {
+  interface Window {
+    dataLayer?: any[];
+    gtag?: (...args: any[]) => void;
+  }
+}
 
 interface FormData {
   name: string;
@@ -37,7 +36,7 @@ export default function ContactForm() {
   const [formStartTime, setFormStartTime] = useState<number | null>(null);
   const router = useRouter();
 
-  // Unified tracking function - use type assertion to avoid declaration issues
+  // Unified tracking function
   const trackEvent = (
     eventName: string,
     eventParams: Record<string, any> = {}
@@ -52,15 +51,12 @@ export default function ContactForm() {
       page_path: window.location.pathname,
     };
 
-    // Use type assertion to avoid TypeScript errors
-    const win = window as any;
-    
-    if (win.dataLayer) {
-      win.dataLayer.push(eventData);
+    if (window.dataLayer) {
+      window.dataLayer.push(eventData);
     }
 
-    if (win.gtag) {
-      win.gtag('event', eventName, eventParams);
+    if (window.gtag) {
+      window.gtag('event', eventName, eventParams);
     }
 
     if (process.env.NODE_ENV === 'development') {

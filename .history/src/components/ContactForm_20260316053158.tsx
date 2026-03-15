@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // components/ContactForm.tsx
 'use client';
 
@@ -6,13 +5,13 @@ import { useState, useEffect } from 'react';
 import { submitContactForm } from '../../actions/contact.action';
 import { useRouter } from 'next/navigation';
 
-// REMOVE THIS ENTIRE DECLARATION BLOCK
-// declare global {
-//   interface Window {
-//     dataLayer?: any[];
-//     gtag?: (...args: any[]) => void;
-//   }
-// }
+// Declare global window types
+declare global {
+  interface Window {
+    dataLayer?: any[];
+    gtag?: (...args: any[]) => void;
+  }
+}
 
 interface FormData {
   name: string;
@@ -35,34 +34,38 @@ export default function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [formStartTime, setFormStartTime] = useState<number | null>(null);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const router = useRouter();
 
-  // Unified tracking function - use type assertion to avoid declaration issues
+  // Unified tracking function that works with both GTM containers and GA4
   const trackEvent = (
     eventName: string,
     eventParams: Record<string, any> = {}
   ) => {
     if (typeof window === 'undefined') return;
 
+    // Prepare the event data
     const eventData = {
       event: eventName,
       ...eventParams,
       timestamp: new Date().toISOString(),
       page_url: window.location.href,
       page_path: window.location.pathname,
+      form_id: 'contact-form',
+      form_name: 'Contact Form'
     };
 
-    // Use type assertion to avoid TypeScript errors
-    const win = window as any;
-    
-    if (win.dataLayer) {
-      win.dataLayer.push(eventData);
+    // Push to dataLayer for GTM (both containers will pick this up)
+    if (window.dataLayer) {
+      window.dataLayer.push(eventData);
     }
 
-    if (win.gtag) {
-      win.gtag('event', eventName, eventParams);
+    // Direct GA4 tracking as backup
+    if (window.gtag) {
+      window.gtag('event', eventName, eventParams);
     }
 
+    // Log in development
     if (process.env.NODE_ENV === 'development') {
       console.log('Track Event:', eventData);
     }
@@ -70,6 +73,7 @@ export default function ContactForm() {
 
   // Track when form is viewed
   useEffect(() => {
+    // Small delay to ensure page view is tracked first
     const timer = setTimeout(() => {
       trackEvent('form_view', {
         form_name: 'contact_form',
@@ -80,26 +84,40 @@ export default function ContactForm() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    
-    // Track first interaction
-    if (!formStartTime && value.length > 0) {
+  // Track first interaction with form
+  const handleFirstInteraction = () => {
+    if (!hasInteracted) {
+      setHasInteracted(true);
       setFormStartTime(Date.now());
+      
       trackEvent('form_interaction_start', {
         form_name: 'contact_form',
         interaction_type: 'first_interaction'
       });
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
     
     setFormData(prev => ({
       ...prev,
       [name]: value,
     }));
+    
+    handleFirstInteraction();
+
+    // Track field focus (only once per field)
+    if (value.length === 1) {
+      trackEvent('form_field_interaction', {
+        form_name: 'contact_form',
+        field_name: name,
+        interaction_type: 'started_typing'
+      });
+    }
   };
 
   const handleServiceChange = (service: string) => {
-    // Track service selection
     trackEvent('form_service_selected', {
       form_name: 'contact_form',
       service_type: service
@@ -109,6 +127,8 @@ export default function ContactForm() {
       ...prev,
       service,
     }));
+    
+    handleFirstInteraction();
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -126,7 +146,8 @@ export default function ContactForm() {
       has_message: !!formData.message,
       has_service: !!formData.service,
       service_selected: formData.service || 'none',
-      time_spent_seconds: timeSpent
+      time_spent_seconds: timeSpent,
+      is_complete: !!(formData.name && formData.email && formData.message)
     });
     
     setIsSubmitting(true);
@@ -135,12 +156,19 @@ export default function ContactForm() {
 
     // Validate form
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      const missingFields = {
+        name: !formData.name.trim(),
+        email: !formData.email.trim(),
+        message: !formData.message.trim()
+      };
+      
       setErrorMessage('Please fill in all required fields.');
       setIsSubmitting(false);
       
       trackEvent('form_validation_error', {
         form_name: 'contact_form',
-        error_type: 'missing_required_fields'
+        error_type: 'missing_required_fields',
+        missing_fields: JSON.stringify(missingFields)
       });
       return;
     }
@@ -176,6 +204,7 @@ export default function ContactForm() {
         });
         
         setSubmitStatus('success');
+        
         // Reset form
         setFormData({
           name: '',
@@ -184,6 +213,13 @@ export default function ContactForm() {
           message: '',
           service: '',
         });
+        
+        // Track before redirect
+        trackEvent('form_redirect', {
+          form_name: 'contact_form',
+          redirect_url: '/contact/success'
+        });
+        
         // Redirect to success page
         router.push('/contact/success');
       } else {
@@ -210,6 +246,8 @@ export default function ContactForm() {
       <form 
         onSubmit={handleSubmit} 
         className="space-y-3"
+        id="contact-form"
+        data-form-name="contact-form"
       >
         {/* Success Message */}
         {submitStatus === 'success' && (
@@ -262,6 +300,8 @@ export default function ContactForm() {
             className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-yellow-400 focus:border-transparent"
             placeholder="Your name"
             disabled={isSubmitting}
+            data-track-field="name"
+            aria-label="Name"
           />
         </div>
 
@@ -280,6 +320,8 @@ export default function ContactForm() {
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-yellow-400 focus:border-transparent"
               placeholder="Phone number"
               disabled={isSubmitting}
+              data-track-field="phone"
+              aria-label="Phone"
             />
           </div>
 
@@ -297,6 +339,8 @@ export default function ContactForm() {
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-yellow-400 focus:border-transparent"
               placeholder="Email address"
               disabled={isSubmitting}
+              data-track-field="email"
+              aria-label="Email"
             />
           </div>
         </div>
@@ -316,6 +360,8 @@ export default function ContactForm() {
             className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-yellow-400 focus:border-transparent resize-none"
             placeholder="Your message..."
             disabled={isSubmitting}
+            data-track-field="message"
+            aria-label="Message"
           />
         </div>
 
@@ -335,6 +381,8 @@ export default function ContactForm() {
                   onChange={() => handleServiceChange(service.toLowerCase())}
                   className="w-4 h-4 text-yellow-500 bg-gray-100 border-gray-300 focus:ring-yellow-400"
                   disabled={isSubmitting}
+                  data-track-service={service.toLowerCase()}
+                  aria-label={`Service: ${service}`}
                 />
                 <span className="ml-2 text-sm text-gray-700">{service}</span>
               </label>
@@ -348,6 +396,7 @@ export default function ContactForm() {
             type="submit"
             disabled={isSubmitting}
             className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-medium py-2.5 rounded-lg transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            data-track-button="submit"
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center">
